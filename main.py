@@ -13,17 +13,17 @@ imgBackground = cv2.imread('Resources/background.png')
 # Importing Mode Images to list
 folderModePath = 'Resources/Modes'
 modePathList = os.listdir(folderModePath)
-imgModelist = []
+imgModeList = []
 
 for path in modePathList:
-    imgModelist.append(cv2.imread(os.path.join(folderModePath, path)))
+    imgModeList.append(cv2.imread(os.path.join(folderModePath, path)))
 
 # Calling the Video Capture Window
 while True:
     success, img = cap.read()
 
     imgBackground[162 : 162 + 480 , 55 : 55 + 640] = img
-    imgBackground[44:44 + 633 , 808:808 + 414] = imgModelist[0]
+    imgBackground[44:44 + 633 , 808:808 + 414] = imgModeList[1]
 
     # Opening the Face Attendance GUI
     cv2.imshow("Attendify - No More Proxy!", imgBackground)
