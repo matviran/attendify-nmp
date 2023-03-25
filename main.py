@@ -37,10 +37,15 @@ while True:
     imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB)
 
     faceCurFrame = face_recognition.face_locations(imgS)
-    encodecurFrame = face_recognition.face_encodings(imgS, faceCurFrame)
+    encodeCurFrame = face_recognition.face_encodings(imgS, faceCurFrame)
 
     imgBackground[162 : 162 + 480 , 55 : 55 + 640] = img
     imgBackground[44:44 + 633 , 808:808 + 414] = imgModeList[1]
+
+    # Looping through the Encodings
+    for encodeFace, faceLoc in zip(encodeCurFrame, faceCurFrame):
+        matches = face_recognition.compare_faces(encodeListKnown,encodeFace)
+        faceDis = face_recognition.face_distance(encodeListKnown,encodeFace)
 
     # Opening the Face Attendance GUI
     cv2.imshow("Attendify - No More Proxy!", imgBackground)
