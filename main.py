@@ -1,7 +1,7 @@
 # Importing Modules
 import os
 import pickle
-
+import numpy
 import cv2
 import face_recognition
 
@@ -48,6 +48,9 @@ while True:
         faceDis = face_recognition.face_distance(encodeListKnown,encodeFace)
         print("matches", matches)
         print("faceDis", faceDis)
+
+        matchIndex = numpy.argmin(faceDis)
+        print('MatchIndex', matchIndex)
 
     # Opening the Face Attendance GUI
     cv2.imshow("Attendify - No More Proxy!", imgBackground)
