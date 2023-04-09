@@ -41,7 +41,7 @@ while True:
     encodeCurFrame = face_recognition.face_encodings(imgS, faceCurFrame)
 
     imgBackground[162 : 162 + 480 , 55 : 55 + 640] = img
-    imgBackground[44:44 + 633 , 808:808 + 414] = imgModeList[1]
+    imgBackground[44:44 + 633 , 808:808 + 414] = imgModeList[3]
 
     # Looping through the Encodings
     for encodeFace, faceLoc in zip(encodeCurFrame, faceCurFrame):
