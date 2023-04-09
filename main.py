@@ -3,6 +3,7 @@ import os
 import pickle
 import numpy
 import cv2
+import cvzone
 import face_recognition
 
 # Adding Video Capture Method and Window Size
@@ -40,7 +41,7 @@ while True:
     encodeCurFrame = face_recognition.face_encodings(imgS, faceCurFrame)
 
     imgBackground[162 : 162 + 480 , 55 : 55 + 640] = img
-    imgBackground[44:44 + 633 , 808:808 + 414] = imgModeList[1]
+    imgBackground[44:44 + 633 , 808:808 + 414] = imgModeList[3]
 
     # Looping through the Encodings
     for encodeFace, faceLoc in zip(encodeCurFrame, faceCurFrame):
@@ -51,6 +52,16 @@ while True:
 
         matchIndex = numpy.argmin(faceDis)
         print('MatchIndex', matchIndex)
+
+        if matches[matchIndex]:
+            print('Known Face Detected')
+            print(studentIds[matchIndex])
+            y1, x2, y2, x1 = faceLoc
+            y1, x2, y2, x1 = y1*4 , x2*4 , y2*4 , x1*4
+            bbox = 55+x1, 162+y1, x2-x1, y2-y1
+            imgBackground = cvzone.cornerRect(imgBackground, bbox, rt=0)
+
+            # cv2.rectangle(imgBackground, pt1=y1*4, pt2=x1*4, color='black')
 
     # Opening the Face Attendance GUI
     cv2.imshow("Attendify - No More Proxy!", imgBackground)
