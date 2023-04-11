@@ -20,6 +20,5 @@ data = {
     }
 }
 
-
 for key, value in data.items():
     ref.child(key).set(value)
